@@ -17,6 +17,11 @@ use Illuminate\Validation\ValidationException;
 class CustomerController extends Controller
 {
 
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     /**
      * GET ALL CUSTOMERS
      * @return JsonResponse
@@ -120,9 +125,69 @@ class CustomerController extends Controller
         }catch(\Exception $e){
 
             return response()->json([
-                'message' => 'Ca marche pas'
+                'message' => 'User could not be created'
             ],409);
         }
+
+    }
+
+
+    /**
+     * UPDATE A CUSTOMER
+     *
+     * @param $id
+     * @param Request $request
+     * @return JsonResponse
+     * @throws ValidationException
+     */
+    public function update($id, Request $request){
+
+        try{
+            $customer = Customer::findOrFail($id);
+        }catch(\Exception $e){
+            return response()->json([
+                'message' => 'This user does not exist'
+            ],404);
+        }
+
+        $this->validate($request,[
+            'firstname' => 'string',
+            'lastname' => 'string',
+            'street' => 'string',
+            'complement' => 'string',
+            'phone' => 'string',
+            'mail' => 'email',
+            'id_marital_status' => 'Integer',
+            'id_cities' => 'Integer',
+            'civility' => 'string',
+            'birthdate' => 'date',
+        ]);
+
+        try{
+            $customer->firstname = $request->input('firstname') ?? $customer->firstname;
+            $customer->lastname = $request->input('lastname') ?? $customer->lastname;
+            $customer->street = $request->input('street') ?? $customer->street;
+            $customer->complement = $request->input('complement') ?? $customer->complement;
+            $customer->phone = $request->input('phone') ?? $customer->phone;
+            $customer->mail = $request->input('mail') ?? $customer->mail;
+            $customer->id_marital_status = $request->input('id_marital_status') ?? $customer->id_marital_status;
+            $customer->id_cities = $request->input('id_cities') ?? $customer->id_cities;
+            $customer->civility = $request->input('civility') ?? $customer->civility;
+            $customer->birthdate = $request->input('birthdate') ?? $customer->birthdate;
+            $customer->save();
+
+            return response()->json([
+                'message' => 'UPDATED',
+                'customer' => $customer
+            ],201);
+
+        }catch(\Exception $e){
+
+            return response()->json([
+                'message' => 'User could not be updated'
+            ],409);
+        }
+
 
     }
 
