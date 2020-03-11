@@ -60,7 +60,13 @@ $router->group(['prefix' => 'api'], function () use ($router) {
     $router->put('estates/{id}', 'EstateController@update');
 
     /**
-     * ROUTES FOR APPOINTMENTS
+     * APPOINTMENTS ROUTES
+     * GET      appointments/                  => get all appointments
+     * GET      appointments/c/e/date          => get appointment by customer/employee/date
+     * TODO: REVOIR LA ROUTE GETWHERE
+     * GET      appointments/attr/arg          => get estates containing argument in attribute
+     * POST     appointments/                  => create new estate
+     * PUT      appointments/id                => update estate
      */
     $router->get('appointments','AppointmentController@getAll');
     $router->get('appointments/{id_customer}/{id_employees}/{date_start}', 'AppointmentController@getOneByIDs');

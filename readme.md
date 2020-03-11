@@ -32,3 +32,11 @@ API for IMOK web / desktop and mobile app
     GET     api/estates/attr/arg          => get estates containing argument in attribute
     POST    api/estates/                  => create new estate
     PUT     api/estates/id                => update estate
+
+    Appointments
+    ----------
+    GET      appointments/                  => get all appointments
+    GET      appointments/c/e/date          => get appointment by customer/employee/date
+    GET      appointments/attr/arg          => get estates containing argument in attribute
+    POST     appointments/                  => create new estate
+    PUT      appointments/id                => update estate
