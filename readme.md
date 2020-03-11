@@ -24,3 +24,11 @@ API for IMOK web / desktop and mobile app
     GET     api/customers/find/argument     => get customers containing argument in mail / firstname / lastname
     POST    api/customers/                  => create new customer
     PUT     api/customers/id                => update customer
+
+    Estates
+    ---------
+    GET     api/estates/                  => get all estates
+    GET     api/estates/id                => get one estate by id
+    GET     api/estates/attr/arg          => get estates containing argument in attribute
+    POST    api/estates/                  => create new estate
+    PUT     api/estates/id                => update estate

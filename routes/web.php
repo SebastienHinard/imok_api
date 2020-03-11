@@ -16,14 +16,19 @@ $router->get('/', function () use ($router) {
 });
 $router->group(['prefix' => 'api'], function () use ($router) {
 
+    /**
+     * TODO : DELETE ROUTES => ADD ACTIVE BOOLEANS TO ENTITIES
+     */
+
+
 
     /**
      * AUTH ROUTES
      */
-    $router->post('login', 'AuthController@login');
-    $router->post('logout', 'AuthController@logout');
-    $router->post('refresh', 'AuthController@refresh');
-    $router->post('me', 'AuthController@me');
+    $router->post('auth/login', 'AuthController@login');
+    $router->post('auth/logout', 'AuthController@logout');
+    $router->post('auth/refresh', 'AuthController@refresh');
+    $router->post('auth/me', 'AuthController@me');
 
 
     /**
@@ -39,4 +44,21 @@ $router->group(['prefix' => 'api'], function () use ($router) {
     $router->get('customers/find/{arg}', 'CustomerController@getWhere');
     $router->post('customers','CustomerController@create');
     $router->put('customers/{id}', 'CustomerController@update');
+
+    /**
+     * ESTATES ROUTES
+     * GET      estates/                  => get all estates
+     * GET      estates/id                => get one estate by id
+     * GET      estates/attr/arg     => get estates containing argument in attribute
+     * POST     estates/                  => create new estate
+     * PUT      estates/id                => update estate
+     */
+    $router->get('estates','EstateController@getAll');
+    $router->get('estates/{id}', 'EstateController@getOneById');
+    $router->get('estates/{attr}/{arg}', 'EstateController@getWhere');
+    $router->post('estates','EstateController@create');
+    $router->put('estates/{id}', 'EstateController@update');
+
+
+
 });

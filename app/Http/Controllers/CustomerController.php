@@ -17,9 +17,26 @@ use Illuminate\Validation\ValidationException;
 class CustomerController extends Controller
 {
 
+    /**
+     * CustomerController constructor.
+     * FIELDS CONTAINS FIELD NAMES, VALIDATION RULES AND REQUIRED BOOL
+     */
     public function __construct()
     {
+
         $this->middleware('auth');
+        $this->fields = [
+            ['name' => 'firstname', 'validation' => 'string', 'required' => true],
+            ['name' => 'lastname', 'validation' => 'string', 'required' => true],
+            ['name' => 'street', 'validation' => 'string', 'required' => true],
+            ['name' => 'complement', 'validation' => 'string', 'required' => false],
+            ['name' => 'phone', 'validation' => 'string', 'required' => true],
+            ['name' => 'mail', 'validation' => 'email', 'required' => true],
+            ['name' => 'id_marital_status', 'validation' => 'integer|exists:marital_status,id', 'required' => true],
+            ['name' => 'id_cities', 'validation' => 'integer|exists:cities,id', 'required' => true],
+            ['name' => 'civility', 'validation' => 'boolean', 'required' => true],
+            ['name' => 'birthdate', 'validation' => 'date', 'required' => true],
+        ];
     }
 
     /**
@@ -87,34 +104,20 @@ class CustomerController extends Controller
     public function create(Request $request){
 
 
-        $this->validate($request,[
-            'firstname' => 'string|required',
-            'lastname' => 'string|required',
-            'street' => 'string|required',
-            'complement' => 'string',
-            'phone' => 'string|required',
-            'mail' => 'required|email',
-            'id_marital_status' => 'Integer|required',
-            'id_cities' => 'Integer|required',
-            'civility' => 'string|required',
-            'birthdate' => 'date|required',
-        ]);
+        $rules = [];
+        foreach($this->fields as $field){
+            $required = $field['required'] === true ? '|required' : '' ;
+            $rules[$field['name']] =  $field['validation'] . $required;
+        }
+        $this->validate($request, $rules);
 
         try{
 
-            $customer = new Customer();
 
-            $customer->firstname = $request->input('firstname');
-            $customer->lastname = $request->input('lastname');
-            $customer->street = $request->input('street');
-            $customer->complement = $request->input('complement');
-            $customer->phone = $request->input('phone');
-            $customer->mail = $request->input('mail');
-            $customer->id_marital_status = $request->input('id_marital_status');
-            $customer->id_cities = $request->input('id_cities');
-            $customer->civility = $request->input('civility');
-            $customer->birthdate = $request->input('birthdate');
-            $customer->date_register = new \DateTime();
+            $customer = new Customer();
+            foreach($this->fields as $field){
+                $customer->{$field['name']} = $request->input($field['name']);
+            }
             $customer->save();
 
             return response()->json([
@@ -150,30 +153,17 @@ class CustomerController extends Controller
             ],404);
         }
 
-        $this->validate($request,[
-            'firstname' => 'string',
-            'lastname' => 'string',
-            'street' => 'string',
-            'complement' => 'string',
-            'phone' => 'string',
-            'mail' => 'email',
-            'id_marital_status' => 'Integer',
-            'id_cities' => 'Integer',
-            'civility' => 'string',
-            'birthdate' => 'date',
-        ]);
+        $rules = [];
+        foreach($this->fields as $field){
+            $rules[$field['name']] =  $field['validation'];
+        }
+        $this->validate($request, $rules);
 
         try{
-            $customer->firstname = $request->input('firstname') ?? $customer->firstname;
-            $customer->lastname = $request->input('lastname') ?? $customer->lastname;
-            $customer->street = $request->input('street') ?? $customer->street;
-            $customer->complement = $request->input('complement') ?? $customer->complement;
-            $customer->phone = $request->input('phone') ?? $customer->phone;
-            $customer->mail = $request->input('mail') ?? $customer->mail;
-            $customer->id_marital_status = $request->input('id_marital_status') ?? $customer->id_marital_status;
-            $customer->id_cities = $request->input('id_cities') ?? $customer->id_cities;
-            $customer->civility = $request->input('civility') ?? $customer->civility;
-            $customer->birthdate = $request->input('birthdate') ?? $customer->birthdate;
+
+            foreach($this->fields as $field){
+                $customer->{$field['name']} = $request->input($field['name']) ?? $customer->{$field['name']};
+            }
             $customer->save();
 
             return response()->json([
