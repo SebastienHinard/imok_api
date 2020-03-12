@@ -41,5 +41,10 @@ class Employee extends Model implements AuthenticatableContract, AuthorizableCon
         return [];
     }
 
+    public function getRole()
+    {
+        return $this->id_roles;
+    }
+
 
 }
