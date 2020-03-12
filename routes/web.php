@@ -74,5 +74,14 @@ $router->group(['prefix' => 'api'], function () use ($router) {
     $router->post('appointments','AppointmentController@create');
     $router->put('appointments/{id_customer}/{id_employees}/{date_start}','AppointmentController@update');
 
+    /**
+     * CITIES
+     * GET      cities/search/arg               => search for cities with argument in name or zipcode
+     * GET      cities/id                       => search for cities by id
+     * GET      cities/attr/arg                 => search for cities with argument in attribute (name, at, insee ..)
+     */
+    $router->get('cities/search/{arg}','CityController@search');
+    $router->get('cities/{id}','CityController@getById');
+    $router->get('cities/{attr}/{arg}','CityController@getByAttr');
 
 });
