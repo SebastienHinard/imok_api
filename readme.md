@@ -12,8 +12,8 @@ API for IMOK web / desktop and mobile app
 
     Login / Logout
     --------------
-    POST    api/login                       => login ( requires mail & password )
-    POST    api/logout                      => logout
+    POST    api/auth/login                  => login ( requires mail & password )
+    POST    api/auth/logout                 => logout
     POST    api/refresh                     => regenerate token and invalidates current token
     POST    api/me                          => displays connected employee informations
     

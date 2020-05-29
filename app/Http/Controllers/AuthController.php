@@ -8,6 +8,7 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\ValidationException;
+use Illuminate\Support\Facades\DB;
 
 
 class AuthController extends Controller
@@ -29,7 +30,6 @@ class AuthController extends Controller
      * @throws ValidationException
      */
     public function login(Request $request){
-
         $this->validate($request,[
            'mail' => 'required|string',
            'password' => 'required|string'
