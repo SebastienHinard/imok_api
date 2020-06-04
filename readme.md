@@ -29,7 +29,7 @@ API for IMOK web / desktop and mobile app
     ---------
     GET     api/estates/                  => get all estates
     GET     api/estates/id                => get one estate by id
-    GET     api/estates/attr/arg          => get estates containing argument in attribute
+    POST    api/estates/search            => get estates containing argument in attribute
     POST    api/estates/                  => create new estate
     PUT     api/estates/id                => update estate
 

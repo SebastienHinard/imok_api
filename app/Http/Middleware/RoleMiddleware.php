@@ -18,8 +18,6 @@ class RoleMiddleware
      */
     public function handle(Request $request, Closure $next, $role)
     {
-//        var_dump($request->user()->getRole() != $role);die;
-
         // Si le role du user ne corresponds pas
         if ($request->user()->getRole() != $role) {
             return response('Access forbidden.', 403);
