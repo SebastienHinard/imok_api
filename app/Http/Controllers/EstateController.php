@@ -89,26 +89,42 @@ class EstateController extends Controller
 
     /**
      * GET AN ESTATE WHERE LIKE IN ATTR
-     * @param $attr
-     * @param $arg
+     * @param Request $request
+     * @param $city
+     * @param string $minBudget
+     * @param string $maxBudget
+     * @param string $minSize
+     * @param string $maxSize
      * @return JsonResponse
      */
-    public function getWhere($attr,$arg)
+    public function getWhere(Request $request)
     {
-        try{
-            $estate = Estate::where($attr, 'like', '%' . $arg . '%')
-                                ->get();
-            return response()->json([
-                'estate' => $estate
-            ],200);
+//        var_dump($request->only(['city', 'minPrice', 'maxPrice', 'minSize', 'maxSize']));
+//        var_dump($request->input('city'));
+//        var_dump($request->input('minPrice'));
+//        var_dump($request->input('maxPrice'));
+//        var_dump($request->input('minSize'));
+//        var_dump($request->input('maxSize'));
 
-        }catch(\Exception $e){
+        try{
+            $estate = Estate::where('city', 'like', '%' . $request->input('city') . '%')->get();
+            if($request->input('maxPrice')) {
+                $estate = Estate::whereBetween('price', [$request->input('minPrice') ?? 0, $request->input('maxPrice')])->get();
+            }
+            if($request->input('maxSize')) {
+                $estate = Estate::whereBetween('size', [$request->input('minSize') ?? 0, $request->input('maxSize')])->get();
+            }
+
+            return response()->json([
+                'estate' => $estate,
+            ],200);
+        }
+        catch(\Exception $e) {
             return response()->json([
                 'message' => 'No match'
             ],404);
         }
     }
-
 
     /**
      * CREATE A NEW ESTATE

@@ -29,6 +29,7 @@ $router->group(['prefix' => 'api'], function () use ($router) {
     $router->post('auth/logout', 'AuthController@logout');
     $router->post('auth/refresh', 'AuthController@refresh');
     $router->post('auth/me', 'AuthController@me');
+//    $router->post('auth/me', ['middleware' => 'role:1', 'uses' => 'AuthController@me']);
 
 
     /**
@@ -49,14 +50,14 @@ $router->group(['prefix' => 'api'], function () use ($router) {
      * ESTATES ROUTES
      * GET      estates/                  => get all estates
      * GET      estates/id                => get one estate by id
-     * GET      estates/attr/arg     => get estates containing argument in attribute
+     * POST     estates/search            => get estates containing argument in attribute
      * POST     estates/                  => create new estate
      * PUT      estates/id                => update estate
      */
     $router->get('estates','EstateController@getAll');
     $router->get('estates/{id}', 'EstateController@getOneById');
-    $router->get('estates/{attr}/{arg}', 'EstateController@getWhere');
-    $router->post('estates','EstateController@create');
+    $router->post('estates/search', 'EstateController@getWhere');
+    $router->post('estates','EstateController@creatse');
     $router->put('estates/{id}', 'EstateController@update');
 
     /**
