@@ -18,11 +18,10 @@ namespace :deploy do
             within release_path  do
                 execute :composer, "install --no-dev --quiet" # install dependencies
                 execute :chmod, "u+x artisan" # make artisan executable
-                execute "mv prod.env .env" # rename .env
+                execute "mv .env.prod .env" # rename .env
             end
         end
     end
-
 end
 
 
