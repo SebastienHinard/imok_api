@@ -1308,3 +1308,102 @@
   INFO [7a100464] Running /usr/bin/env echo "Branch master (at 3723757f54f168c530141dadda5e816acc875051) deployed as release 20200604142345 by sebastien" >> /var/www/clients/client51/web49/web/revisions.log as am_armanddimok@54.37.71.121
  DEBUG [7a100464] Command: cd /var/www/clients/client51/web49/web/releases && /usr/bin/env echo "Branch master (at 3723757f54f168c530141dadda5e816acc875051) deployed as release 20200604142345 by sebastien" >> /var/www/clients/client51/web49/web/revisions.log
   INFO [7a100464] Finished in 0.117 seconds with exit status 0 (successful).
+  INFO ---------------------------------------------------------------------------
+  INFO START 2020-06-05 11:25:21 +0200 cap production deploy
+  INFO ---------------------------------------------------------------------------
+  INFO [d2870c32] Running /usr/bin/env mkdir -p /tmp as am_armanddimok@54.37.71.121
+ DEBUG [d2870c32] Command: /usr/bin/env mkdir -p /tmp
+  INFO [d2870c32] Finished in 0.684 seconds with exit status 0 (successful).
+ DEBUG Uploading /tmp/git-ssh-ImOk_API-production-sebastien.sh 0.0%
+  INFO Uploading /tmp/git-ssh-ImOk_API-production-sebastien.sh 100.0%
+  INFO [aaf9a30b] Running /usr/bin/env chmod 700 /tmp/git-ssh-ImOk_API-production-sebastien.sh as am_armanddimok@54.37.71.121
+ DEBUG [aaf9a30b] Command: /usr/bin/env chmod 700 /tmp/git-ssh-ImOk_API-production-sebastien.sh
+  INFO [aaf9a30b] Finished in 0.107 seconds with exit status 0 (successful).
+  INFO [cb962707] Running /usr/bin/env git ls-remote https://github.com/CDA-Promo2/imok_api.git HEAD as am_armanddimok@54.37.71.121
+ DEBUG [cb962707] Command: ( export GIT_ASKPASS="/bin/echo" GIT_SSH="/tmp/git-ssh-ImOk_API-production-sebastien.sh" ; /usr/bin/env git ls-remote https://github.com/CDA-Promo2/imok_api.git HEAD )
+ DEBUG [cb962707] 	bc05e1d9cc8172f39f376c8f8b6e8810e208276e	HEAD
+  INFO [cb962707] Finished in 0.947 seconds with exit status 0 (successful).
+  INFO [9e76a984] Running /usr/bin/env mkdir -p /var/www/clients/client51/web49/web/shared /var/www/clients/client51/web49/web/releases as am_armanddimok@54.37.71.121
+ DEBUG [9e76a984] Command: /usr/bin/env mkdir -p /var/www/clients/client51/web49/web/shared /var/www/clients/client51/web49/web/releases
+  INFO [9e76a984] Finished in 0.105 seconds with exit status 0 (successful).
+ DEBUG [12f383db] Running [ -f /var/www/clients/client51/web49/web/current/REVISION ] as am_armanddimok@54.37.71.121
+ DEBUG [12f383db] Command: [ -f /var/www/clients/client51/web49/web/current/REVISION ]
+ DEBUG [12f383db] Finished in 0.111 seconds with exit status 0 (successful).
+ DEBUG [6b5835c9] Running /usr/bin/env cat /var/www/clients/client51/web49/web/current/REVISION 2>/dev/null as am_armanddimok@54.37.71.121
+ DEBUG [6b5835c9] Command: /usr/bin/env cat /var/www/clients/client51/web49/web/current/REVISION 2>/dev/null
+ DEBUG [6b5835c9] 	3723757f54f168c530141dadda5e816acc875051
+ DEBUG [6b5835c9] Finished in 0.117 seconds with exit status 0 (successful).
+ DEBUG [a7c878cd] Running [ -f /var/www/clients/client51/web49/web/repo/HEAD ] as am_armanddimok@54.37.71.121
+ DEBUG [a7c878cd] Command: [ -f /var/www/clients/client51/web49/web/repo/HEAD ]
+ DEBUG [a7c878cd] Finished in 0.102 seconds with exit status 0 (successful).
+  INFO The repository mirror is at /var/www/clients/client51/web49/web/repo
+ DEBUG [38168b63] Running if test ! -d /var/www/clients/client51/web49/web/repo; then echo "Directory does not exist '/var/www/clients/client51/web49/web/repo'" 1>&2; false; fi as am_armanddimok@54.37.71.121
+ DEBUG [38168b63] Command: if test ! -d /var/www/clients/client51/web49/web/repo; then echo "Directory does not exist '/var/www/clients/client51/web49/web/repo'" 1>&2; false; fi
+ DEBUG [38168b63] Finished in 0.108 seconds with exit status 0 (successful).
+  INFO [f2f7ac64] Running /usr/bin/env git remote set-url origin https://github.com/CDA-Promo2/imok_api.git as am_armanddimok@54.37.71.121
+ DEBUG [f2f7ac64] Command: cd /var/www/clients/client51/web49/web/repo && ( export GIT_ASKPASS="/bin/echo" GIT_SSH="/tmp/git-ssh-ImOk_API-production-sebastien.sh" ; /usr/bin/env git remote set-url origin https://github.com/CDA-Promo2/imok_api.git )
+  INFO [f2f7ac64] Finished in 0.196 seconds with exit status 0 (successful).
+  INFO [d171d7a0] Running /usr/bin/env git remote update --prune as am_armanddimok@54.37.71.121
+ DEBUG [d171d7a0] Command: cd /var/www/clients/client51/web49/web/repo && ( export GIT_ASKPASS="/bin/echo" GIT_SSH="/tmp/git-ssh-ImOk_API-production-sebastien.sh" ; /usr/bin/env git remote update --prune )
+ DEBUG [d171d7a0] 	Récupération de origin
+ DEBUG [d171d7a0] 	Depuis https://github.com/CDA-Promo2/imok_api
+   3723757..bc05e1d  master     -> master
+  INFO [d171d7a0] Finished in 1.324 seconds with exit status 0 (successful).
+ DEBUG [1e737c67] Running if test ! -d /var/www/clients/client51/web49/web/repo; then echo "Directory does not exist '/var/www/clients/client51/web49/web/repo'" 1>&2; false; fi as am_armanddimok@54.37.71.121
+ DEBUG [1e737c67] Command: if test ! -d /var/www/clients/client51/web49/web/repo; then echo "Directory does not exist '/var/www/clients/client51/web49/web/repo'" 1>&2; false; fi
+ DEBUG [1e737c67] Finished in 0.105 seconds with exit status 0 (successful).
+  INFO [5ee13a80] Running /usr/bin/env mkdir -p /var/www/clients/client51/web49/web/releases/20200605092524 as am_armanddimok@54.37.71.121
+ DEBUG [5ee13a80] Command: cd /var/www/clients/client51/web49/web/repo && ( export GIT_ASKPASS="/bin/echo" GIT_SSH="/tmp/git-ssh-ImOk_API-production-sebastien.sh" ; /usr/bin/env mkdir -p /var/www/clients/client51/web49/web/releases/20200605092524 )
+  INFO [5ee13a80] Finished in 0.121 seconds with exit status 0 (successful).
+  INFO [8b0693fa] Running /usr/bin/env git archive master | /usr/bin/env tar -x -f - -C /var/www/clients/client51/web49/web/releases/20200605092524 as am_armanddimok@54.37.71.121
+ DEBUG [8b0693fa] Command: cd /var/www/clients/client51/web49/web/repo && ( export GIT_ASKPASS="/bin/echo" GIT_SSH="/tmp/git-ssh-ImOk_API-production-sebastien.sh" ; /usr/bin/env git archive master | /usr/bin/env tar -x -f - -C /var/www/clients/client51/web49/web/releases/20200605092524 )
+  INFO [8b0693fa] Finished in 0.137 seconds with exit status 0 (successful).
+ DEBUG [cb04f714] Running if test ! -d /var/www/clients/client51/web49/web/repo; then echo "Directory does not exist '/var/www/clients/client51/web49/web/repo'" 1>&2; false; fi as am_armanddimok@54.37.71.121
+ DEBUG [cb04f714] Command: if test ! -d /var/www/clients/client51/web49/web/repo; then echo "Directory does not exist '/var/www/clients/client51/web49/web/repo'" 1>&2; false; fi
+ DEBUG [cb04f714] Finished in 0.101 seconds with exit status 0 (successful).
+ DEBUG [17dcc8cf] Running /usr/bin/env git rev-list --max-count=1 master as am_armanddimok@54.37.71.121
+ DEBUG [17dcc8cf] Command: cd /var/www/clients/client51/web49/web/repo && ( export GIT_ASKPASS="/bin/echo" GIT_SSH="/tmp/git-ssh-ImOk_API-production-sebastien.sh" ; /usr/bin/env git rev-list --max-count=1 master )
+ DEBUG [17dcc8cf] 	bc05e1d9cc8172f39f376c8f8b6e8810e208276e
+ DEBUG [17dcc8cf] Finished in 0.108 seconds with exit status 0 (successful).
+ DEBUG [c4736de1] Running if test ! -d /var/www/clients/client51/web49/web/releases/20200605092524; then echo "Directory does not exist '/var/www/clients/client51/web49/web/releases/20200605092524'" 1>&2; false; fi as am_armanddimok@54.37.71.121
+ DEBUG [c4736de1] Command: if test ! -d /var/www/clients/client51/web49/web/releases/20200605092524; then echo "Directory does not exist '/var/www/clients/client51/web49/web/releases/20200605092524'" 1>&2; false; fi
+ DEBUG [c4736de1] Finished in 0.108 seconds with exit status 0 (successful).
+  INFO [0e01fcee] Running /usr/bin/env echo "bc05e1d9cc8172f39f376c8f8b6e8810e208276e" > REVISION as am_armanddimok@54.37.71.121
+ DEBUG [0e01fcee] Command: cd /var/www/clients/client51/web49/web/releases/20200605092524 && /usr/bin/env echo "bc05e1d9cc8172f39f376c8f8b6e8810e208276e" > REVISION
+  INFO [0e01fcee] Finished in 0.108 seconds with exit status 0 (successful).
+ DEBUG [20d75910] Running if test ! -d /var/www/clients/client51/web49/web/releases/20200605092524; then echo "Directory does not exist '/var/www/clients/client51/web49/web/releases/20200605092524'" 1>&2; false; fi as am_armanddimok@54.37.71.121
+ DEBUG [20d75910] Command: if test ! -d /var/www/clients/client51/web49/web/releases/20200605092524; then echo "Directory does not exist '/var/www/clients/client51/web49/web/releases/20200605092524'" 1>&2; false; fi
+ DEBUG [20d75910] Finished in 0.105 seconds with exit status 0 (successful).
+  INFO [f67ba794] Running /usr/bin/env composer install --no-dev --quiet as am_armanddimok@54.37.71.121
+ DEBUG [f67ba794] Command: cd /var/www/clients/client51/web49/web/releases/20200605092524 && /usr/bin/env composer install --no-dev --quiet
+  INFO [f67ba794] Finished in 3.575 seconds with exit status 0 (successful).
+  INFO [e597c11b] Running /usr/bin/env chmod u+x artisan as am_armanddimok@54.37.71.121
+ DEBUG [e597c11b] Command: cd /var/www/clients/client51/web49/web/releases/20200605092524 && /usr/bin/env chmod u+x artisan
+  INFO [e597c11b] Finished in 0.100 seconds with exit status 0 (successful).
+  INFO [e7b5126a] Running /usr/bin/env ln -s /var/www/clients/client51/web49/web/releases/20200605092524 /var/www/clients/client51/web49/web/releases/current as am_armanddimok@54.37.71.121
+ DEBUG [e7b5126a] Command: /usr/bin/env ln -s /var/www/clients/client51/web49/web/releases/20200605092524 /var/www/clients/client51/web49/web/releases/current
+  INFO [e7b5126a] Finished in 0.103 seconds with exit status 0 (successful).
+  INFO [16e24028] Running /usr/bin/env mv /var/www/clients/client51/web49/web/releases/current /var/www/clients/client51/web49/web as am_armanddimok@54.37.71.121
+ DEBUG [16e24028] Command: /usr/bin/env mv /var/www/clients/client51/web49/web/releases/current /var/www/clients/client51/web49/web
+  INFO [16e24028] Finished in 0.106 seconds with exit status 0 (successful).
+ DEBUG [e3eced85] Running /usr/bin/env ls -x /var/www/clients/client51/web49/web/releases as am_armanddimok@54.37.71.121
+ DEBUG [e3eced85] Command: /usr/bin/env ls -x /var/www/clients/client51/web49/web/releases
+ DEBUG [e3eced85] 	20200604141456	20200604142204	20200604142345	20200605092524
+ DEBUG [e3eced85] Finished in 0.101 seconds with exit status 0 (successful).
+  INFO Keeping 3 of 4 deployed releases on 54.37.71.121
+ DEBUG [53df4e86] Running [ -d /var/www/clients/client51/web49/web/current ] as am_armanddimok@54.37.71.121
+ DEBUG [53df4e86] Command: [ -d /var/www/clients/client51/web49/web/current ]
+ DEBUG [53df4e86] Finished in 0.099 seconds with exit status 0 (successful).
+ DEBUG [590380ed] Running /usr/bin/env readlink /var/www/clients/client51/web49/web/current as am_armanddimok@54.37.71.121
+ DEBUG [590380ed] Command: /usr/bin/env readlink /var/www/clients/client51/web49/web/current
+ DEBUG [590380ed] 	/var/www/clients/client51/web49/web/releases/20200605092524
+ DEBUG [590380ed] Finished in 0.103 seconds with exit status 0 (successful).
+  INFO [1dcdc0a1] Running /usr/bin/env rm -rf /var/www/clients/client51/web49/web/releases/20200604141456 as am_armanddimok@54.37.71.121
+ DEBUG [1dcdc0a1] Command: /usr/bin/env rm -rf /var/www/clients/client51/web49/web/releases/20200604141456
+  INFO [1dcdc0a1] Finished in 1.009 seconds with exit status 0 (successful).
+ DEBUG [0f88cea6] Running if test ! -d /var/www/clients/client51/web49/web/releases; then echo "Directory does not exist '/var/www/clients/client51/web49/web/releases'" 1>&2; false; fi as am_armanddimok@54.37.71.121
+ DEBUG [0f88cea6] Command: if test ! -d /var/www/clients/client51/web49/web/releases; then echo "Directory does not exist '/var/www/clients/client51/web49/web/releases'" 1>&2; false; fi
+ DEBUG [0f88cea6] Finished in 0.105 seconds with exit status 0 (successful).
+  INFO [a1873644] Running /usr/bin/env echo "Branch master (at bc05e1d9cc8172f39f376c8f8b6e8810e208276e) deployed as release 20200605092524 by sebastien" >> /var/www/clients/client51/web49/web/revisions.log as am_armanddimok@54.37.71.121
+ DEBUG [a1873644] Command: cd /var/www/clients/client51/web49/web/releases && /usr/bin/env echo "Branch master (at bc05e1d9cc8172f39f376c8f8b6e8810e208276e) deployed as release 20200605092524 by sebastien" >> /var/www/clients/client51/web49/web/revisions.log
+  INFO [a1873644] Finished in 0.108 seconds with exit status 0 (successful).
