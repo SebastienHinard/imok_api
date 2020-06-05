@@ -43,7 +43,9 @@ class AuthController extends Controller
             ], 401);
         }
 
-        return $this->respondWithToken($token);
+        $user = Auth::user();
+
+        return $this->respondWithToken($token, $user);
     }
 
     /**
@@ -79,11 +81,12 @@ class AuthController extends Controller
      * @param $token
      * @return JsonResponse
      */
-    protected function respondWithToken($token){
+    protected function respondWithToken($token, $user){
         return response()->json([
             'access_token' => $token,
             'token_type' => 'bearer',
-            'expires_in' => Auth::factory()->getTTL()*60
+            'expires_in' => Auth::factory()->getTTL()*60,
+            'user' => $user
         ]);
     }
 
