@@ -34,6 +34,14 @@ class AppointmentController extends Controller
     /**
      * GET ALL APPOINTMENT
      * @return JsonResponse
+     * @OA\Get(path="/appointments}",
+     *  summary="Get all appointments",
+     *  tags={"Appointments"},
+     *  @OA\Response(
+     *    response=200,
+     *    description="Appointments",
+     *  ),
+     * )
      */
     public function getAll()
     {
@@ -46,6 +54,18 @@ class AppointmentController extends Controller
      * GET A APPOINTMENT BY ITS ID
      * @param $id
      * @return JsonResponse
+     * @OA\Get(path="/appointements/{id_employees}/{id_customers}/{date_start}",
+     *  summary="Get appointment",
+     *  tags={"Appointments"},
+     *  @OA\Response(
+     *    response=200,
+     *    description="Appointment",
+     *  ),
+     *  @OA\Response(
+     *    response=404,
+     *    description="Appointment not found",
+     *  ),
+     * )
      */
     public function getOneByIDs($id_employees, $id_customer, $date_start)
     {
@@ -69,6 +89,18 @@ class AppointmentController extends Controller
      * GET APPOINTMENTS BY ITS EMPLOYEE
      * @param $id_employees
      * @return JsonResponse
+     * @OA\Get(path="/appointments/{id_employees}",
+     *  summary="Get employee's appointments",
+     *  tags={"Appointments"},
+     *  @OA\Response(
+     *    response=200,
+     *    description="Appointments",
+     *  ),
+     *  @OA\Response(
+     *    response=404,
+     *    description="No appointment found",
+     *  ),
+     * )
      */
     public function getByEmployee($id_employees)
     {
@@ -89,6 +121,18 @@ class AppointmentController extends Controller
      * GET APPOINTMENTS BY ITS CUSTOMER
      * @param $id_customers
      * @return JsonResponse
+     * @OA\Get(path="/appointments/{id_customers}",
+     *  summary="Get customer's appointments",
+     *  tags={"Appointments"},
+     *  @OA\Response(
+     *    response=200,
+     *    description="Appointments",
+     *  ),
+     *  @OA\Response(
+     *    response=404,
+     *    description="No appointment found",
+     *  ),
+     * )
      */
     public function getByCustomer($id_customers)
     {
@@ -137,6 +181,18 @@ class AppointmentController extends Controller
      * @param Request $request
      * @return JsonResponse
      * @throws ValidationException
+     * @OA\Post(path="/appointments",
+     *  summary="Create appointment",
+     *  tags={"Appointments"},
+     *  @OA\Response(
+     *    response=201,
+     *    description="Appointment created",
+     *  ),
+     *  @OA\Response(
+     *    response=409,
+     *    description="Appointment could not be created",
+     *  ),
+     * )
      */
     public function create(Request $request){
 
@@ -178,6 +234,22 @@ class AppointmentController extends Controller
      * @param Request $request
      * @return JsonResponse
      * @throws ValidationException
+     * @OA\Put(path="/appointements/{id_employees}/{id_customers}/{date_start}",
+     *  summary="Update appointment",
+     *  tags={"Appointments"},
+     *  @OA\Response(
+     *    response=201,
+     *    description="Appointment updated",
+     *  ),
+     *  @OA\Response(
+     *    response=404,
+     *    description="Appointment not found",
+     *  ),
+     *  @OA\Response(
+     *    response=409,
+     *    description="Appointment cound not be updated",
+     *  ),
+     * )
      */
     public function update($id_customer, $id_employees, $date_start, Request $request) {
 
@@ -217,7 +289,5 @@ class AppointmentController extends Controller
                 'message' => 'Une erreur est survenu à la modification'
             ],409);
         }
-
     }
-
 }

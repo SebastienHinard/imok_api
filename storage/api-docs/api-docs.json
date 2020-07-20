@@ -1,0 +1,360 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "IMOK Api",
+        "version": "0.1.0"
+    },
+    "paths": {
+        "/appointments}": {
+            "get": {
+                "tags": [
+                    "Appointments"
+                ],
+                "summary": "Get all appointments",
+                "operationId": "App\\Http\\Controllers\\AppointmentController::getAll",
+                "responses": {
+                    "200": {
+                        "description": "Appointments"
+                    }
+                }
+            }
+        },
+        "/appointements/{id_employees}/{id_customers}/{date_start}": {
+            "get": {
+                "tags": [
+                    "Appointments"
+                ],
+                "summary": "Get appointment",
+                "operationId": "App\\Http\\Controllers\\AppointmentController::getOneByIDs",
+                "responses": {
+                    "200": {
+                        "description": "Appointment"
+                    },
+                    "404": {
+                        "description": "Appointment not found"
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "Appointments"
+                ],
+                "summary": "Update appointment",
+                "operationId": "App\\Http\\Controllers\\AppointmentController::update",
+                "responses": {
+                    "201": {
+                        "description": "Appointment updated"
+                    },
+                    "404": {
+                        "description": "Appointment not found"
+                    },
+                    "409": {
+                        "description": "Appointment cound not be updated"
+                    }
+                }
+            }
+        },
+        "/appointments/{id_employees}": {
+            "get": {
+                "tags": [
+                    "Appointments"
+                ],
+                "summary": "Get employee's appointments",
+                "operationId": "App\\Http\\Controllers\\AppointmentController::getByEmployee",
+                "responses": {
+                    "200": {
+                        "description": "Appointments"
+                    },
+                    "404": {
+                        "description": "No appointment found"
+                    }
+                }
+            }
+        },
+        "/appointments/{id_customers}": {
+            "get": {
+                "tags": [
+                    "Appointments"
+                ],
+                "summary": "Get customer's appointments",
+                "operationId": "App\\Http\\Controllers\\AppointmentController::getByCustomer",
+                "responses": {
+                    "200": {
+                        "description": "Appointments"
+                    },
+                    "404": {
+                        "description": "No appointment found"
+                    }
+                }
+            }
+        },
+        "/appointments": {
+            "post": {
+                "tags": [
+                    "Appointments"
+                ],
+                "summary": "Create appointment",
+                "operationId": "App\\Http\\Controllers\\AppointmentController::create",
+                "responses": {
+                    "201": {
+                        "description": "Appointment created"
+                    },
+                    "409": {
+                        "description": "Appointment could not be created"
+                    }
+                }
+            }
+        },
+        "/customers": {
+            "get": {
+                "tags": [
+                    "Customers"
+                ],
+                "summary": "Get all customers",
+                "operationId": "App\\Http\\Controllers\\CustomerController::getAll",
+                "responses": {
+                    "200": {
+                        "description": "Customers"
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Customers"
+                ],
+                "summary": "Create a new customer",
+                "operationId": "App\\Http\\Controllers\\CustomerController::create",
+                "requestBody": {
+                    "description": "Pass user credentials",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "email",
+                                    "password"
+                                ],
+                                "properties": {
+                                    "email": {
+                                        "description": "CREATE A NEW CUSTOMER",
+                                        "type": "string",
+                                        "format": "email",
+                                        "example": "user1@mail.com"
+                                    },
+                                    "password": {
+                                        "description": "CREATE A NEW CUSTOMER",
+                                        "type": "string",
+                                        "format": "password",
+                                        "example": "PassWord12345"
+                                    },
+                                    "persistent": {
+                                        "description": "CREATE A NEW CUSTOMER",
+                                        "type": "boolean",
+                                        "example": "true"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "409": {
+                        "description": "Customer could not be created"
+                    },
+                    "201": {
+                        "description": "Customer created"
+                    }
+                }
+            }
+        },
+        "/customers/{id}": {
+            "get": {
+                "tags": [
+                    "Customers"
+                ],
+                "summary": "Get a customer",
+                "operationId": "App\\Http\\Controllers\\CustomerController::getOneById",
+                "responses": {
+                    "404": {
+                        "description": "Customer does not exist"
+                    },
+                    "200": {
+                        "description": "Customer"
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "Customers"
+                ],
+                "summary": "Update a customer",
+                "operationId": "App\\Http\\Controllers\\CustomerController::update",
+                "responses": {
+                    "404": {
+                        "description": "Customer does not exist"
+                    },
+                    "409": {
+                        "description": "Customer could not be updated"
+                    },
+                    "201": {
+                        "description": "Customer updated"
+                    }
+                }
+            }
+        },
+        "/customers/find/{argument}": {
+            "get": {
+                "tags": [
+                    "Customers"
+                ],
+                "summary": "Get a customer where argument can be found in name or mail",
+                "operationId": "App\\Http\\Controllers\\CustomerController::getWhere",
+                "responses": {
+                    "404": {
+                        "description": "No customer found"
+                    },
+                    "200": {
+                        "description": "Matching customer(s)"
+                    }
+                }
+            }
+        },
+        "/estates": {
+            "get": {
+                "tags": [
+                    "Estates"
+                ],
+                "summary": "Get all estate",
+                "operationId": "App\\Http\\Controllers\\EstateController::getAll",
+                "responses": {
+                    "200": {
+                        "description": "Estates"
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Estates"
+                ],
+                "summary": "Create estate",
+                "operationId": "App\\Http\\Controllers\\EstateController::create",
+                "requestBody": {
+                    "description": "Some arguments are required",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "customers_id": {
+                                        "description": "CREATE A NEW ESTATE",
+                                        "type": "integer",
+                                        "example": "1"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Estate created"
+                    },
+                    "409": {
+                        "description": "Estate could not be created"
+                    }
+                }
+            }
+        },
+        "/estates/{id}": {
+            "get": {
+                "tags": [
+                    "Estates"
+                ],
+                "summary": "Get estate",
+                "operationId": "App\\Http\\Controllers\\EstateController::getOneById",
+                "responses": {
+                    "200": {
+                        "description": "Estate"
+                    },
+                    "404": {
+                        "description": "Estate not found"
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "Estates"
+                ],
+                "summary": "Update an estate",
+                "operationId": "App\\Http\\Controllers\\EstateController::update",
+                "responses": {
+                    "201": {
+                        "description": "Estate updated"
+                    },
+                    "404": {
+                        "description": "Estate not found"
+                    },
+                    "409": {
+                        "description": "Estate could not be updated"
+                    }
+                }
+            }
+        },
+        "/estates/search": {
+            "post": {
+                "tags": [
+                    "Estates"
+                ],
+                "summary": "Search estate with matching argument",
+                "operationId": "App\\Http\\Controllers\\EstateController::getWhere",
+                "requestBody": {
+                    "description": "Pass any of these arguments",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "city": {
+                                        "description": "GET AN ESTATE WHERE LIKE IN ATTR",
+                                        "type": "string",
+                                        "example": "amiens"
+                                    },
+                                    "minBudget": {
+                                        "description": "GET AN ESTATE WHERE LIKE IN ATTR",
+                                        "type": "string",
+                                        "example": "10000"
+                                    },
+                                    "maxBudget": {
+                                        "description": "GET AN ESTATE WHERE LIKE IN ATTR",
+                                        "type": "string",
+                                        "example": "999999"
+                                    },
+                                    "minSize": {
+                                        "description": "GET AN ESTATE WHERE LIKE IN ATTR",
+                                        "type": "string",
+                                        "example": "30"
+                                    },
+                                    "maxSize": {
+                                        "description": "GET AN ESTATE WHERE LIKE IN ATTR",
+                                        "type": "string",
+                                        "example": "300"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Matching Estates"
+                    },
+                    "404": {
+                        "description": "No matching Estate found"
+                    }
+                }
+            }
+        }
+    }
+}

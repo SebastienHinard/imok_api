@@ -58,6 +58,14 @@ class EstateController extends Controller
     /**
      * GET ALL ESTATES
      * @return JsonResponse
+     * @OA\Get(path="/estates",
+     *  summary="Get all estate",
+     *  tags={"Estates"},
+     *  @OA\Response(
+     *    response=200,
+     *    description="Estates",
+     *  )
+     * )
      */
     public function getAll()
     {
@@ -71,6 +79,18 @@ class EstateController extends Controller
      * GET AN ESTATE BY ITS ID
      * @param $id
      * @return JsonResponse
+     * @OA\Get(path="/estates/{id}",
+     *  summary="Get estate",
+     *  tags={"Estates"},
+     *  @OA\Response(
+     *    response=200,
+     *    description="Estate",
+     *  ),
+     *  @OA\Response(
+     *    response=404,
+     *    description="Estate not found",
+     *  ),
+     * )
      */
     public function getOneById($id)
     {
@@ -96,6 +116,28 @@ class EstateController extends Controller
      * @param string $minSize
      * @param string $maxSize
      * @return JsonResponse
+     * @OA\Post(path="/estates/search",
+     *  summary="Search estate with matching argument",
+     *  tags={"Estates"},
+     *  @OA\RequestBody(
+     *    description="Pass any of these arguments",
+     *    @OA\JsonContent(
+     *       @OA\Property(property="city", type="string", example="amiens"),
+     *       @OA\Property(property="minBudget", type="string", example="10000"),
+     *       @OA\Property(property="maxBudget", type="string", example="999999"),
+     *       @OA\Property(property="minSize", type="string", example="30"),
+     *       @OA\Property(property="maxSize", type="string", example="300"),
+     *    ),
+     *  ),
+     *  @OA\Response(
+     *    response=200,
+     *    description="Matching Estates",
+     *  ),
+     *  @OA\Response(
+     *    response=404,
+     *    description="No matching Estate found",
+     *  ),
+     * )
      */
     public function getWhere(Request $request)
     {
@@ -125,6 +167,25 @@ class EstateController extends Controller
      * @param Request $request
      * @return JsonResponse
      * @throws ValidationException
+     * @OA\Post(path="/estates",
+     *  summary="Create estate",
+     *  tags={"Estates"},
+     *  @OA\RequestBody(
+     *    required=true,
+     *    description="Some arguments are required",
+     *    @OA\JsonContent(
+     *       @OA\Property(property="customers_id", type="integer", example="1"),
+     *    ),
+     *  ),
+     *  @OA\Response(
+     *    response=201,
+     *    description="Estate created",
+     *  ),
+     *  @OA\Response(
+     *    response=409,
+     *    description="Estate could not be created",
+     *  ),
+     * )
      */
     public function create(Request $request){
 
@@ -166,6 +227,22 @@ class EstateController extends Controller
      * @param Request $request
      * @return JsonResponse
      * @throws ValidationException
+     * @OA\Put(path="/estates/{id}",
+     *  summary="Update an estate",
+     *  tags={"Estates"},
+     *  @OA\Response(
+     *    response=201,
+     *    description="Estate updated",
+     *  ),
+     *  @OA\Response(
+     *    response=404,
+     *    description="Estate not found",
+     *  ),
+     *  @OA\Response(
+     *    response=409,
+     *    description="Estate could not be updated",
+     *  ),
+     * )
      */
     public function update($id, Request $request){
 

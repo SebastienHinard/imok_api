@@ -42,6 +42,14 @@ class CustomerController extends Controller
     /**
      * GET ALL CUSTOMERS
      * @return JsonResponse
+     * @OA\Get(path="/customers",
+     *  summary="Get all customers",
+     *  tags={"Customers"},
+     *  @OA\Response(
+     *    response=200,
+     *    description="Customers",
+     *  )
+     * )
      */
     public function getAll()
     {
@@ -59,6 +67,18 @@ class CustomerController extends Controller
      * GET A CUSTOMER BY ITS ID
      * @param $id
      * @return JsonResponse
+     * @OA\Get(path="/customers/{id}",
+     *  summary="Get a customer",
+     *  tags={"Customers"},
+     *  @OA\Response(
+     *    response=404,
+     *    description="Customer does not exist",
+     *  ),
+     *  @OA\Response(
+     *    response=200,
+     *    description="Customer",
+     *  )
+     * )
      */
     public function getOneById($id)
     {
@@ -79,6 +99,18 @@ class CustomerController extends Controller
      * GET A CUSTOMER WHERE LIKE IN NAME OR MAIL
      * @param $arg
      * @return JsonResponse
+     * @OA\Get(path="/customers/find/{argument}",
+     *  summary="Get a customer where argument can be found in name or mail",
+     *  tags={"Customers"},
+     *  @OA\Response(
+     *    response=404,
+     *    description="No customer found",
+     *    ),
+     *  @OA\Response(
+     *    response=200,
+     *    description="Matching customer(s)",
+     *  )
+     * )
      */
     public function getWhere($arg)
     {
@@ -105,6 +137,28 @@ class CustomerController extends Controller
      * @param Request $request
      * @return JsonResponse
      * @throws ValidationException
+     * @OA\Post(path="/customers",
+     *  summary="Create a new customer",
+     *  tags={"Customers"},
+     *  @OA\RequestBody(
+     *    required=true,
+     *    description="Pass user credentials",
+     *    @OA\JsonContent(
+     *       required={"email","password"},
+     *       @OA\Property(property="email", type="string", format="email", example="user1@mail.com"),
+     *       @OA\Property(property="password", type="string", format="password", example="PassWord12345"),
+     *       @OA\Property(property="persistent", type="boolean", example="true"),
+     *    ),
+     *  ),
+     *  @OA\Response(
+     *    response=409,
+     *    description="Customer could not be created",
+     *  ),
+     *  @OA\Response(
+     *    response=201,
+     *    description="Customer created",
+     *  )
+     * )
      */
     public function create(Request $request){
 
@@ -147,6 +201,22 @@ class CustomerController extends Controller
      * @param Request $request
      * @return JsonResponse
      * @throws ValidationException
+     * @OA\Put(path="/customers/{id}",
+     *  summary="Update a customer",
+     *  tags={"Customers"},
+     *  @OA\Response(
+     *    response=404,
+     *    description="Customer does not exist",
+     *  ),
+     *  @OA\Response(
+     *    response=409,
+     *    description="Customer could not be updated",
+     *  ),
+     *  @OA\Response(
+     *    response=201,
+     *    description="Customer updated",
+     *  )
+     * )
      */
     public function update($id, Request $request){
 
