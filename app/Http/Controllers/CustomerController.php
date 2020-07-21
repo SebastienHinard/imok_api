@@ -45,9 +45,11 @@ class CustomerController extends Controller
      * @OA\Get(path="/customers",
      *  summary="Get all customers",
      *  tags={"Customers"},
+     *  security={{"JWT":{}}},
      *  @OA\Response(
      *    response=200,
      *    description="Customers",
+     *    @OA\JsonContent(type="array",@OA\Items(ref="#/components/schemas/Customer")),
      *  )
      * )
      */
@@ -70,6 +72,7 @@ class CustomerController extends Controller
      * @OA\Get(path="/customers/{id}",
      *  summary="Get a customer",
      *  tags={"Customers"},
+     *  security={{"JWT":{}}},
      *  @OA\Response(
      *    response=404,
      *    description="Customer does not exist",
@@ -77,6 +80,7 @@ class CustomerController extends Controller
      *  @OA\Response(
      *    response=200,
      *    description="Customer",
+     *    @OA\MediaType(mediaType="application/json",@OA\Schema(ref="#/components/schemas/Customer"))
      *  )
      * )
      */
@@ -102,6 +106,7 @@ class CustomerController extends Controller
      * @OA\Get(path="/customers/find/{argument}",
      *  summary="Get a customer where argument can be found in name or mail",
      *  tags={"Customers"},
+     *  security={{"JWT":{}}},
      *  @OA\Response(
      *    response=404,
      *    description="No customer found",
@@ -109,6 +114,7 @@ class CustomerController extends Controller
      *  @OA\Response(
      *    response=200,
      *    description="Matching customer(s)",
+     *    @OA\JsonContent(type="array",@OA\Items(ref="#/components/schemas/Customer")),
      *  )
      * )
      */
@@ -140,6 +146,7 @@ class CustomerController extends Controller
      * @OA\Post(path="/customers",
      *  summary="Create a new customer",
      *  tags={"Customers"},
+     *  security={{"JWT":{}}},
      *  @OA\RequestBody(
      *    required=true,
      *    description="Pass user credentials",
@@ -204,6 +211,7 @@ class CustomerController extends Controller
      * @OA\Put(path="/customers/{id}",
      *  summary="Update a customer",
      *  tags={"Customers"},
+     *  security={{"JWT":{}}},
      *  @OA\Response(
      *    response=404,
      *    description="Customer does not exist",

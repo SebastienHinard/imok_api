@@ -34,12 +34,14 @@ class AppointmentController extends Controller
     /**
      * GET ALL APPOINTMENT
      * @return JsonResponse
-     * @OA\Get(path="/appointments}",
+     * @OA\Get(path="/appointments",
      *  summary="Get all appointments",
      *  tags={"Appointments"},
+     *  security={{"JWT":{}}},
      *  @OA\Response(
      *    response=200,
      *    description="Appointments",
+     *    @OA\JsonContent(type="array",@OA\Items(ref="#/components/schemas/Appointment")),
      *  ),
      * )
      */
@@ -57,9 +59,11 @@ class AppointmentController extends Controller
      * @OA\Get(path="/appointements/{id_employees}/{id_customers}/{date_start}",
      *  summary="Get appointment",
      *  tags={"Appointments"},
+     *  security={{"JWT":{}}},
      *  @OA\Response(
      *    response=200,
      *    description="Appointment",
+     *    @OA\MediaType(mediaType="application/json",@OA\Schema(ref="#/components/schemas/Appointment"))
      *  ),
      *  @OA\Response(
      *    response=404,
@@ -92,9 +96,11 @@ class AppointmentController extends Controller
      * @OA\Get(path="/appointments/{id_employees}",
      *  summary="Get employee's appointments",
      *  tags={"Appointments"},
+     *  security={{"JWT":{}}},
      *  @OA\Response(
      *    response=200,
      *    description="Appointments",
+     *    @OA\JsonContent(type="array",@OA\Items(ref="#/components/schemas/Appointment")),
      *  ),
      *  @OA\Response(
      *    response=404,
@@ -124,9 +130,11 @@ class AppointmentController extends Controller
      * @OA\Get(path="/appointments/{id_customers}",
      *  summary="Get customer's appointments",
      *  tags={"Appointments"},
+     *  security={{"JWT":{}}},
      *  @OA\Response(
      *    response=200,
      *    description="Appointments",
+     *    @OA\JsonContent(type="array",@OA\Items(ref="#/components/schemas/Appointment")),
      *  ),
      *  @OA\Response(
      *    response=404,
@@ -184,6 +192,7 @@ class AppointmentController extends Controller
      * @OA\Post(path="/appointments",
      *  summary="Create appointment",
      *  tags={"Appointments"},
+     *  security={{"JWT":{}}},
      *  @OA\Response(
      *    response=201,
      *    description="Appointment created",
@@ -237,6 +246,7 @@ class AppointmentController extends Controller
      * @OA\Put(path="/appointements/{id_employees}/{id_customers}/{date_start}",
      *  summary="Update appointment",
      *  tags={"Appointments"},
+     *  security={{"JWT":{}}},
      *  @OA\Response(
      *    response=201,
      *    description="Appointment updated",

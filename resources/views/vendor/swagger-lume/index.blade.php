@@ -80,6 +80,8 @@
             configUrl: {!! isset($additionalConfigUrl) ? '"' . $additionalConfigUrl . '"' : 'null' !!},
             validatorUrl: {!! isset($validatorUrl) ? '"' . $validatorUrl . '"' : 'null' !!},
             oauth2RedirectUrl: "{{ route('swagger-lume.oauth2_callback') }}",
+            docExpansion: "none",
+            defaultModelsExpandDepth: -1,
 
             presets: [
                 SwaggerUIBundle.presets.apis,
@@ -90,7 +92,7 @@
                 SwaggerUIBundle.plugins.DownloadUrl
             ],
 
-            layout: "StandaloneLayout"
+            layout: "BaseLayout"
         })
 
         window.ui = ui

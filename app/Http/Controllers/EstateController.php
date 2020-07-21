@@ -61,9 +61,11 @@ class EstateController extends Controller
      * @OA\Get(path="/estates",
      *  summary="Get all estate",
      *  tags={"Estates"},
+     *  security={{"JWT":{}}},
      *  @OA\Response(
      *    response=200,
      *    description="Estates",
+     *    @OA\JsonContent(type="array",@OA\Items(ref="#/components/schemas/Estate")),
      *  )
      * )
      */
@@ -82,9 +84,11 @@ class EstateController extends Controller
      * @OA\Get(path="/estates/{id}",
      *  summary="Get estate",
      *  tags={"Estates"},
+     *  security={{"JWT":{}}},
      *  @OA\Response(
      *    response=200,
      *    description="Estate",
+     *    @OA\MediaType(mediaType="application/json",@OA\Schema(ref="#/components/schemas/Estate"))
      *  ),
      *  @OA\Response(
      *    response=404,
@@ -119,6 +123,7 @@ class EstateController extends Controller
      * @OA\Post(path="/estates/search",
      *  summary="Search estate with matching argument",
      *  tags={"Estates"},
+     *  security={{"JWT":{}}},
      *  @OA\RequestBody(
      *    description="Pass any of these arguments",
      *    @OA\JsonContent(
@@ -132,6 +137,7 @@ class EstateController extends Controller
      *  @OA\Response(
      *    response=200,
      *    description="Matching Estates",
+     *    @OA\JsonContent(type="array",@OA\Items(ref="#/components/schemas/Estate")),
      *  ),
      *  @OA\Response(
      *    response=404,
@@ -170,6 +176,7 @@ class EstateController extends Controller
      * @OA\Post(path="/estates",
      *  summary="Create estate",
      *  tags={"Estates"},
+     *  security={{"JWT":{}}},
      *  @OA\RequestBody(
      *    required=true,
      *    description="Some arguments are required",
@@ -230,6 +237,7 @@ class EstateController extends Controller
      * @OA\Put(path="/estates/{id}",
      *  summary="Update an estate",
      *  tags={"Estates"},
+     *  security={{"JWT":{}}},
      *  @OA\Response(
      *    response=201,
      *    description="Estate updated",

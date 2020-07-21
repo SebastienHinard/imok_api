@@ -2,10 +2,11 @@
     "openapi": "3.0.0",
     "info": {
         "title": "IMOK Api",
+        "description": "This API is meant to be used along with the IMOK_Mobile and IMOK_Desktop apps. All routes require you to be authenticated, so your first step is to send your credentials to api/auth/login and get a bearer token.",
         "version": "0.1.0"
     },
     "paths": {
-        "/appointments}": {
+        "/appointments": {
             "get": {
                 "tags": [
                     "Appointments"
@@ -14,9 +15,44 @@
                 "operationId": "App\\Http\\Controllers\\AppointmentController::getAll",
                 "responses": {
                     "200": {
-                        "description": "Appointments"
+                        "description": "Appointments",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/Appointment"
+                                    }
+                                }
+                            }
+                        }
                     }
-                }
+                },
+                "security": [
+                    {
+                        "JWT": []
+                    }
+                ]
+            },
+            "post": {
+                "tags": [
+                    "Appointments"
+                ],
+                "summary": "Create appointment",
+                "operationId": "App\\Http\\Controllers\\AppointmentController::create",
+                "responses": {
+                    "201": {
+                        "description": "Appointment created"
+                    },
+                    "409": {
+                        "description": "Appointment could not be created"
+                    }
+                },
+                "security": [
+                    {
+                        "JWT": []
+                    }
+                ]
             }
         },
         "/appointements/{id_employees}/{id_customers}/{date_start}": {
@@ -28,12 +64,24 @@
                 "operationId": "App\\Http\\Controllers\\AppointmentController::getOneByIDs",
                 "responses": {
                     "200": {
-                        "description": "Appointment"
+                        "description": "Appointment",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Appointment"
+                                }
+                            }
+                        }
                     },
                     "404": {
                         "description": "Appointment not found"
                     }
-                }
+                },
+                "security": [
+                    {
+                        "JWT": []
+                    }
+                ]
             },
             "put": {
                 "tags": [
@@ -51,7 +99,12 @@
                     "409": {
                         "description": "Appointment cound not be updated"
                     }
-                }
+                },
+                "security": [
+                    {
+                        "JWT": []
+                    }
+                ]
             }
         },
         "/appointments/{id_employees}": {
@@ -63,12 +116,27 @@
                 "operationId": "App\\Http\\Controllers\\AppointmentController::getByEmployee",
                 "responses": {
                     "200": {
-                        "description": "Appointments"
+                        "description": "Appointments",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/Appointment"
+                                    }
+                                }
+                            }
+                        }
                     },
                     "404": {
                         "description": "No appointment found"
                     }
-                }
+                },
+                "security": [
+                    {
+                        "JWT": []
+                    }
+                ]
             }
         },
         "/appointments/{id_customers}": {
@@ -80,29 +148,120 @@
                 "operationId": "App\\Http\\Controllers\\AppointmentController::getByCustomer",
                 "responses": {
                     "200": {
-                        "description": "Appointments"
+                        "description": "Appointments",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/Appointment"
+                                    }
+                                }
+                            }
+                        }
                     },
                     "404": {
                         "description": "No appointment found"
                     }
-                }
+                },
+                "security": [
+                    {
+                        "JWT": []
+                    }
+                ]
             }
         },
-        "/appointments": {
-            "post": {
+        "/cities/{id}": {
+            "get": {
                 "tags": [
-                    "Appointments"
+                    "Cities"
                 ],
-                "summary": "Create appointment",
-                "operationId": "App\\Http\\Controllers\\AppointmentController::create",
+                "summary": "Get city by its ID",
+                "operationId": "App\\Http\\Controllers\\CityController::getById",
                 "responses": {
-                    "201": {
-                        "description": "Appointment created"
+                    "200": {
+                        "description": "City",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/City"
+                                }
+                            }
+                        }
                     },
-                    "409": {
-                        "description": "Appointment could not be created"
+                    "404": {
+                        "description": "Not found"
                     }
-                }
+                },
+                "security": [
+                    {
+                        "JWT": []
+                    }
+                ]
+            }
+        },
+        "/cities/{attribute}/{value}": {
+            "get": {
+                "tags": [
+                    "Cities"
+                ],
+                "summary": "Get city by any attribute",
+                "operationId": "App\\Http\\Controllers\\CityController::getByAttr",
+                "responses": {
+                    "200": {
+                        "description": "Cities",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/City"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "No result"
+                    }
+                },
+                "security": [
+                    {
+                        "JWT": []
+                    }
+                ]
+            }
+        },
+        "/cities/search/{value}": {
+            "get": {
+                "tags": [
+                    "Cities"
+                ],
+                "summary": "Search city by name or zipcode",
+                "operationId": "App\\Http\\Controllers\\CityController::search",
+                "responses": {
+                    "200": {
+                        "description": "Cities",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/City"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "No result"
+                    }
+                },
+                "security": [
+                    {
+                        "JWT": []
+                    }
+                ]
             }
         },
         "/customers": {
@@ -114,9 +273,24 @@
                 "operationId": "App\\Http\\Controllers\\CustomerController::getAll",
                 "responses": {
                     "200": {
-                        "description": "Customers"
+                        "description": "Customers",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/Customer"
+                                    }
+                                }
+                            }
+                        }
                     }
-                }
+                },
+                "security": [
+                    {
+                        "JWT": []
+                    }
+                ]
             },
             "post": {
                 "tags": [
@@ -165,7 +339,12 @@
                     "201": {
                         "description": "Customer created"
                     }
-                }
+                },
+                "security": [
+                    {
+                        "JWT": []
+                    }
+                ]
             }
         },
         "/customers/{id}": {
@@ -180,9 +359,21 @@
                         "description": "Customer does not exist"
                     },
                     "200": {
-                        "description": "Customer"
+                        "description": "Customer",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Customer"
+                                }
+                            }
+                        }
                     }
-                }
+                },
+                "security": [
+                    {
+                        "JWT": []
+                    }
+                ]
             },
             "put": {
                 "tags": [
@@ -200,7 +391,12 @@
                     "201": {
                         "description": "Customer updated"
                     }
-                }
+                },
+                "security": [
+                    {
+                        "JWT": []
+                    }
+                ]
             }
         },
         "/customers/find/{argument}": {
@@ -215,9 +411,24 @@
                         "description": "No customer found"
                     },
                     "200": {
-                        "description": "Matching customer(s)"
+                        "description": "Matching customer(s)",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/Customer"
+                                    }
+                                }
+                            }
+                        }
                     }
-                }
+                },
+                "security": [
+                    {
+                        "JWT": []
+                    }
+                ]
             }
         },
         "/estates": {
@@ -229,9 +440,24 @@
                 "operationId": "App\\Http\\Controllers\\EstateController::getAll",
                 "responses": {
                     "200": {
-                        "description": "Estates"
+                        "description": "Estates",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/Estate"
+                                    }
+                                }
+                            }
+                        }
                     }
-                }
+                },
+                "security": [
+                    {
+                        "JWT": []
+                    }
+                ]
             },
             "post": {
                 "tags": [
@@ -264,7 +490,12 @@
                     "409": {
                         "description": "Estate could not be created"
                     }
-                }
+                },
+                "security": [
+                    {
+                        "JWT": []
+                    }
+                ]
             }
         },
         "/estates/{id}": {
@@ -276,12 +507,24 @@
                 "operationId": "App\\Http\\Controllers\\EstateController::getOneById",
                 "responses": {
                     "200": {
-                        "description": "Estate"
+                        "description": "Estate",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Estate"
+                                }
+                            }
+                        }
                     },
                     "404": {
                         "description": "Estate not found"
                     }
-                }
+                },
+                "security": [
+                    {
+                        "JWT": []
+                    }
+                ]
             },
             "put": {
                 "tags": [
@@ -299,7 +542,12 @@
                     "409": {
                         "description": "Estate could not be updated"
                     }
-                }
+                },
+                "security": [
+                    {
+                        "JWT": []
+                    }
+                ]
             }
         },
         "/estates/search": {
@@ -348,12 +596,366 @@
                 },
                 "responses": {
                     "200": {
-                        "description": "Matching Estates"
+                        "description": "Matching Estates",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/Estate"
+                                    }
+                                }
+                            }
+                        }
                     },
                     "404": {
                         "description": "No matching Estate found"
                     }
-                }
+                },
+                "security": [
+                    {
+                        "JWT": []
+                    }
+                ]
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "Appointment": {
+                "title": "Appointment",
+                "properties": {
+                    "date_start": {
+                        "type": "string",
+                        "format": "date"
+                    },
+                    "note": {
+                        "type": "string"
+                    },
+                    "feedback": {
+                        "type": "string"
+                    },
+                    "id_appointment_types": {
+                        "type": "integer"
+                    },
+                    "id_customers": {
+                        "type": "integer"
+                    },
+                    "id_employees": {
+                        "type": "integer"
+                    },
+                    "customer_firstname": {
+                        "type": "string"
+                    },
+                    "customer_lastname": {
+                        "type": "string"
+                    },
+                    "employee_firstname": {
+                        "type": "string"
+                    },
+                    "employee_lastname": {
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            },
+            "City": {
+                "title": "City",
+                "properties": {
+                    "department_code": {
+                        "description": "Class City",
+                        "type": "string"
+                    },
+                    "insee_code": {
+                        "description": "Class City",
+                        "type": "string"
+                    },
+                    "zip_code": {
+                        "description": "Class City",
+                        "type": "string"
+                    },
+                    "name": {
+                        "description": "Class City",
+                        "type": "string"
+                    },
+                    "slug": {
+                        "description": "Class City",
+                        "type": "string"
+                    },
+                    "gps_lat": {
+                        "description": "Class City",
+                        "type": "number",
+                        "format": "float"
+                    },
+                    "gps_lng": {
+                        "description": "Class City",
+                        "type": "number",
+                        "format": "float"
+                    }
+                },
+                "type": "object"
+            },
+            "Customer": {
+                "title": "Customer",
+                "properties": {
+                    "firstname": {
+                        "description": "Class Customer",
+                        "type": "string"
+                    },
+                    "lastname": {
+                        "description": "Class Customer",
+                        "type": "string"
+                    },
+                    "street": {
+                        "description": "Class Customer",
+                        "type": "string"
+                    },
+                    "complement": {
+                        "description": "Class Customer",
+                        "type": "string"
+                    },
+                    "phone": {
+                        "description": "Class Customer",
+                        "type": "string"
+                    },
+                    "mail": {
+                        "description": "Class Customer",
+                        "type": "email"
+                    },
+                    "id_marital_status": {
+                        "description": "Class Customer",
+                        "type": "integer"
+                    },
+                    "id_cities": {
+                        "description": "Class Customer",
+                        "type": "integer"
+                    },
+                    "civility": {
+                        "description": "Class Customer",
+                        "type": "integer"
+                    },
+                    "birthdate": {
+                        "description": "Class Customer",
+                        "type": "string",
+                        "format": "date"
+                    },
+                    "date_register": {
+                        "description": "Class Customer",
+                        "type": "string",
+                        "format": "date"
+                    },
+                    "zip_code": {
+                        "description": "Class Customer",
+                        "type": "string"
+                    },
+                    "city": {
+                        "description": "Class Customer",
+                        "type": "string"
+                    },
+                    "marital_status": {
+                        "description": "Class Customer",
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            },
+            "Estate": {
+                "title": "Estate",
+                "properties": {
+                    "id": {
+                        "description": "Class Estate",
+                        "type": "integer"
+                    },
+                    "rooms": {
+                        "description": "Class Estate",
+                        "type": "integer"
+                    },
+                    "facilities": {
+                        "description": "Class Estate",
+                        "type": "object"
+                    },
+                    "street": {
+                        "description": "Class Estate",
+                        "type": "string"
+                    },
+                    "complement": {
+                        "description": "Class Estate",
+                        "type": "string"
+                    },
+                    "description": {
+                        "description": "Class Estate",
+                        "type": "string"
+                    },
+                    "room_numbers": {
+                        "description": "Class Estate",
+                        "type": "integer"
+                    },
+                    "bedroom_numbers": {
+                        "description": "Class Estate",
+                        "type": "string"
+                    },
+                    "joint-ownership": {
+                        "description": "Class Estate",
+                        "type": "boolean"
+                    },
+                    "annual_fees": {
+                        "description": "Class Estate",
+                        "type": "number",
+                        "format": "double"
+                    },
+                    "price": {
+                        "description": "Class Estate",
+                        "type": "number",
+                        "format": "double"
+                    },
+                    "rent": {
+                        "description": "Class Estate",
+                        "type": "number",
+                        "format": "double"
+                    },
+                    "condominium": {
+                        "description": "Class Estate",
+                        "type": "boolean"
+                    },
+                    "condominium_fees": {
+                        "description": "Class Estate",
+                        "type": "number",
+                        "format": "double"
+                    },
+                    "property_tax": {
+                        "description": "Class Estate",
+                        "type": "number",
+                        "format": "double"
+                    },
+                    "housing_tax": {
+                        "description": "Class Estate",
+                        "type": "number",
+                        "format": "double"
+                    },
+                    "energy_consumption": {
+                        "description": "Class Estate",
+                        "type": "number",
+                        "format": "double"
+                    },
+                    "gas_emission": {
+                        "description": "Class Estate",
+                        "type": "number",
+                        "format": "double"
+                    },
+                    "size": {
+                        "description": "Class Estate",
+                        "type": "number",
+                        "format": "double"
+                    },
+                    "carrez_size": {
+                        "description": "Class Estate",
+                        "type": "number",
+                        "format": "double"
+                    },
+                    "floor": {
+                        "description": "Class Estate",
+                        "type": "integer"
+                    },
+                    "floor_number": {
+                        "description": "Class Estate",
+                        "type": "integer"
+                    },
+                    "renovation": {
+                        "description": "Class Estate",
+                        "type": "boolean"
+                    },
+                    "id_customers": {
+                        "description": "Class Estate",
+                        "type": "integer"
+                    },
+                    "id_build_Dates": {
+                        "description": "Class Estate",
+                        "type": "integer"
+                    },
+                    "id_outside_conditions": {
+                        "description": "Class Estate",
+                        "type": "integer"
+                    },
+                    "id_heating_types": {
+                        "description": "Class Estate",
+                        "type": "integer"
+                    },
+                    "id_districts": {
+                        "description": "Class Estate",
+                        "type": "integer"
+                    },
+                    "id_expositions": {
+                        "description": "Class Estate",
+                        "type": "integer"
+                    },
+                    "id_cities": {
+                        "description": "Class Estate",
+                        "type": "integer"
+                    },
+                    "id_estate_types": {
+                        "description": "Class Estate",
+                        "type": "integer"
+                    },
+                    "period": {
+                        "description": "Class Estate",
+                        "type": "string"
+                    },
+                    "zip_code": {
+                        "description": "Class Estate",
+                        "type": "string"
+                    },
+                    "city": {
+                        "description": "Class Estate",
+                        "type": "string"
+                    },
+                    "city_lat": {
+                        "description": "Class Estate",
+                        "type": "number",
+                        "format": "float"
+                    },
+                    "cities_lng": {
+                        "description": "Class Estate",
+                        "type": "number",
+                        "format": "float"
+                    },
+                    "owner_firsname": {
+                        "description": "Class Estate",
+                        "type": "string"
+                    },
+                    "owner_lastname": {
+                        "description": "Class Estate",
+                        "type": "string"
+                    },
+                    "exposition": {
+                        "description": "Class Estate",
+                        "type": "string"
+                    },
+                    "heating_type": {
+                        "description": "Class Estate",
+                        "type": "string"
+                    },
+                    "notes": {
+                        "description": "Class Estate",
+                        "type": "string"
+                    },
+                    "outside_condition": {
+                        "description": "Class Estate",
+                        "type": "string"
+                    },
+                    "estate_type": {
+                        "description": "Class Estate",
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            }
+        },
+        "securitySchemes": {
+            "api_key": {
+                "type": "apiKey",
+                "description": "JWT Auth Token",
+                "name": "JWT",
+                "in": "header"
             }
         }
     }
